@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os  
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-xe0a+gqcq4ms^q!9guvv+kr5!)%pok7n@$+hqdqvr!)9^45npx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com','.ritesh.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com','.ritesh.com', '0.0.0.0', '0,0,0,0']
 
 
 # Application definition
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'mmysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,9 +117,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+# STATIC_URL = 'static/'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     "blog","static", 
+# ]
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
 
+# Static root for production (for collectstatic)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
+
+# Static files directory for development
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'blog', 'static')
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
